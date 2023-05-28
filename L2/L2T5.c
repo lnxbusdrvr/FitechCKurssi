@@ -8,6 +8,7 @@ int main(void) {
   int nValinta;
 
   char sMjono[MAX];
+  printf("\n");
   do {
     printf("Valikko\n");
     printf("1) Lisää uusi merkki\n");
@@ -50,13 +51,14 @@ int main(void) {
         break;
 
       default:
+        printf("\n");
         printf("Tuntematon valinta.\n");
         printf("\n");
         break;
     }
   } while(nValinta != 0);
 
-  printf("Ohjelman lopetus.\n");
+  printf("\nOhjelman lopetus.\n");
 
   return 0;
 }
