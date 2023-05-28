@@ -20,21 +20,21 @@ int main(void) {
 
     switch (nValinta) {
       case 0:
+        nValinta = 0;
         break;
 
       case 1:
         printf("\n");
         printf("Anna jokin merkki: ");
-        scanf("%s", sMjono);
+        scanf("%199s", sMjono);
         printf("\n");
         break;
 
       case 2:
         printf("\n");
         for (int i = 0; i <= sizeof(sMjono); i++) {
-          sMjono[i] = ' ';
+          sMjono[i] = '\0';
         }
-        sMjono[0] = '\0';
         printf("Merkkijono on tyhjennetty.\n");
         printf("\n");
         break;
