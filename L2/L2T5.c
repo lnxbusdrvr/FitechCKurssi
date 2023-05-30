@@ -1,4 +1,4 @@
-/* un 20230529 L2T5.c */
+/* un 20230530 L2T5.c */
 /******************************************************************/
 #include <stdio.h>
 
@@ -6,26 +6,24 @@
 #define FALSE 0
 #define TRUE 1
 
+int annaKoko(char *str);
+
 int main(void) {
   int nValinta;
 
   char sMjono[MAX];
-  int iRivit = 0;
+  int iRivi = 0;
 
   int bOnkoMjonossaTietuetta = FALSE;
 
   /* Merkkijonopointteri 
    * merkkien järjestyksen 
    * tallentamiseen 
+   * Oikeastaan koon selvittämiseen
    */
-  char *pMjono = sMjono;
+  char *pMjono;
 
-  /* 
-   * Merkkijonopointteri
-   * seuraavan vapaan 
-   * paikan osoittamiseen
-   */
-  char *pSeurMerkki = sMjono;
+  int mjonokoko;
 
   printf("\n");
   do {
@@ -37,42 +35,9 @@ int main(void) {
     printf("Valintasi: ");
     
     scanf("%d", &nValinta); 
-    /*
-     * Ymmärsin tehtävän väärin
-     * valinta ei ole ikinä tyhjä 
-     * 
-     * vaan ilmoitetaan, jos sMjono on tyhjä
-    if (scanf("%d", &nValinta) > 0) {
-      printf("Input = %d", nValinta);
-    } else {
-      printf("Merkkijono oli tyhjä.\n");
-      return; // Palaa takaisin valikon alkuun
-    }
-    */
-    /*
-    int nSyote = scanf("%d", &nValinta); 
-    if ( nSyote == '\0') {
-      printf("\n\nDEBUG\nOliTyhjäSyöte\n");
-      */
-      /* Tyhjennä syötepuskuri: */
-    /*
-      int c;
-      */
-      /*
-       * getchar()-funktio lukee yhden merkin syötteestä.
-       * Sijoitetaan luettu merkki muuttujaan c.
-       * Tarkistetaan, onko luettu merkki rivinvaihtomerkki ('\n') tai tiedoston loppu (EOF).
-       *   - Jos luettu merkki ei ole rivinvaihtomerkki eikä tiedoston loppu, toistetaan askel 1.
-       *   - Jos luettu merkki on rivinvaihtomerkki tai tiedoston loppu, lopetetaan silmukka.
-       */
-      /*
-      while ((c = getchar()) != '\n' && c != EOF);
 
-      */
-      /*
-      continue; // Palaa takaisin valikon alkuun
-    }
-    */
+    pMjono = sMjono;
+    mjonokoko = annaKoko(pMjono);
 
     switch (nValinta) {
       case 0:
@@ -82,41 +47,47 @@ int main(void) {
       case 1:
         printf("\n");
         printf("Anna jokin merkki: ");
-        /* scanf("%s", sMjono); */
-        getchar();
-        scanf("%c", pSeurMerkki);
-        bOnkoMjonossaTietuetta = TRUE; 
-        iRivit++;
-        pSeurMerkki++; // Siirry seuraavaan vapaaseen paikkaan
+        scanf("%s", &sMjono[iRivi]);
+        /*if (sMjono[iRivi] == '\n' && sMjono[iRivi+1] == '\0') {*/
+        /**if(getchar() == '\n' && getchar() == EOF) { */
+        if (getchar() == '\n' && sMjono[iRivi] == '\0') {
+          printf("\nMerkkijono oli tyhjä.");
+        } else if(sMjono[iRivi] > MAX) {
+          printf("Merkkijonoon ei mahdu enempää merkkejä.");
+        } else {
+          bOnkoMjonossaTietuetta = TRUE; 
+          iRivi++;
+        }
+
+        /*getchar();*/
         printf("\n");
         break;
 
       case 2:
-        printf("\n");
         if (bOnkoMjonossaTietuetta == TRUE) {
-          for (int i = 0; i <= sizeof(sMjono); i++) {
-            sMjono[i] = '\0';
+          for (int i = 0; i <= mjonokoko; i++) {
+            sMjono[i] = ' ';
           }
+          printf("\n");
           printf("Merkkijono on tyhjennetty.\n");
           bOnkoMjonossaTietuetta = FALSE; 
         } else
-          printf("Merkkijono on tyhjä.\n");
+          printf("\nMerkkijono on tyhjä.\n");
 
         printf("\n");
         break;
 
       case 3:
-        printf("\n");
         if (bOnkoMjonossaTietuetta == TRUE) {
+          printf("\n");
           printf("Merkkijono: ");
-          for (int i = 0; i < iRivit; i++) {
-            printf("%c", *pMjono); /* Tulosta merkki kerrallaan */
-            pMjono++;
+          for (int i = 0; i < mjonokoko; i++) {
+            printf("%c", sMjono[i]);
           }
+          printf("\n");
         } else
-          printf("Merkkijono on tyhjä.");
+          printf("\nMerkkijono on tyhjä.\n");
 
-        printf("\n");
         printf("\n");
         break;
 
@@ -132,6 +103,15 @@ int main(void) {
 
   return 0;
 }
+
+int annaKoko( char *str) {
+  int koko = 0;
+  while (str[koko] != '\0') {
+    koko++;
+  }
+  return koko;
+}
+
 
 /******************************************************************/
 /* eof */ 
