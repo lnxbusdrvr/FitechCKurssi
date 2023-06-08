@@ -1,7 +1,7 @@
 CC = gcc
-CFLAGS = -std=c99 -Wall
+CFLAGS = -std=c99 -Wall -pedantic
 
-default: L3T4
+default: L3T5
 
 all: L3T1 L3T2 L3T3 L3T4 L3T5 
 
