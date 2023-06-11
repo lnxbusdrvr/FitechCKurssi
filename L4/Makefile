@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -std=c99 -Wall -pedantic
 #CFLAGS = -std=c99 
 
-default: L4T2
+default: L4T3
 
 all: L4T1 L4T2 L4T3 L4T4 L4T5 
 
